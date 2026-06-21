@@ -1,20 +1,15 @@
 ﻿/**
- * Format an ISO date string into a date label.
- *
- * @param {string} isoString - ISO-formatted date string from the podcast API.
- * @returns {string} Human-readable date text.
+ * formatDate
+ * Convert an ISO 8601 string to a localized, human-readable date.
+ * Example output: "July 7, 2025".
+ * @param {string} isoString - A valid ISO 8601 date string (e.g. "2025-07-07T12:34:56Z").
+ * @returns {string} Formatted date string in the user's locale.
  */
-export default function formatDate(isoString) {
+export function formatDate(isoString) {
   const date = new Date(isoString);
-  if (!isoString || Number.isNaN(date.getTime())) {
-    return "Date unavailable";
-  }
-
-  const formattedDate = date.toLocaleDateString("en-GB", {
+  return date.toLocaleDateString(undefined, {
     year: "numeric",
     month: "long",
-    day: "2-digit",
+    day: "numeric",
   });
-
-  return `Updated ${formattedDate}`;
 }
